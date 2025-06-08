@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,11 @@ public class UsersService {
     public List<Users> findAll() {
         log.info("Obteninedo todos los usuarios");
         return repository.findAll();
+    }
+
+    public Optional<Users> findById(Long id){
+        Users user = repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return repository.findById(id);
     }
 
     public Users update(Users users) {
