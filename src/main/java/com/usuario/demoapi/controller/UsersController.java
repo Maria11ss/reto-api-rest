@@ -5,7 +5,6 @@ import com.usuario.demoapi.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +28,18 @@ public class UsersController {
     @Operation(summary = "Obtener todos los usuarios registrados")
     public ResponseEntity<List<Users>> getAll(){
         return ResponseEntity.ok(usersService.findAll());
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Actualizar un usuario registrado")
+    public ResponseEntity<Users> update(@PathVariable Long id, @RequestBody Users users){
+        return ResponseEntity.ok(usersService.update(users));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar un usuario registrado")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        usersService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

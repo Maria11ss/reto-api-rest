@@ -25,4 +25,24 @@ public class UsersService {
         log.info("Obteninedo todos los usuarios");
         return repository.findAll();
     }
+
+    public Users update(Users users) {
+        Users user = repository.findById(users.getId()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if (users.getName() != null) {
+            user.setName(users.getName());
+        }
+        if (users.getEmail() != null) {
+            user.setEmail(users.getEmail());
+        }
+        log.info("Actualizando usuario: {}", users);
+        return repository.save(users);
+    }
+
+    public void delete(Long id) {
+        Users user = repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        if (user != null) {
+            log.info("Eliminando usuario con id: {}", id);
+            repository.delete(user);
+        }
+    }
 }
