@@ -3,7 +3,7 @@ spring:
     name: DemoApi
 
   datasource:
-    url: jdbc:mysql://localhost:3306/reto_api_rest
+    url: jdbc:mysql://localhost:3306/reto_api_rest?allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
